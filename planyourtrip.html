@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plan Your Trip to Achham - Visit Achham</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2C5530",
+              secondary: "#8B6D4C",
+              sky: "#87CEEB",
+              sage: "#9CAF88",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+        color: #333333;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .nav-link,
+      .btn {
+        font-family: "Poppins", sans-serif;
+      }
+      .logo {
+        font-family: "Pacifico", serif;
+      }
+      .hero-section {
+        height: 70vh;
+        background-size: cover;
+        background-position: center;
+      }
+      .hero-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1),
+          rgba(0, 0, 0, 0.6)
+        );
+      }
+      .accordion-header {
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .accordion-header:hover {
+        background-color: #f9fafb;
+      }
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease-out;
+        opacity: 0;
+      }
+      .accordion-content.active {
+        max-height: 1000px;
+        opacity: 1;
+        transition: all 0.6s ease-in;
+      }
+      .accordion-arrow {
+        transition: transform 0.3s ease;
+      }
+      .accordion-arrow.rotated {
+        transform: rotate(180deg);
+      }
+      .sticky-sidebar {
+        position: sticky;
+        top: 100px;
+      }
+      .checklist-item {
+        transition: all 0.2s ease;
+      }
+      .checklist-item:hover {
+        background-color: #f0f9ff;
+        transform: translateX(4px);
+      }
+      .weather-chart {
+        background: linear-gradient(135deg, #87ceeb 0%, #9caf88 100%);
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #2c5530;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+      @media (max-width: 768px) {
+        .hero-section {
+          height: 50vh;
+        }
+        .sticky-sidebar {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="logo text-2xl text-primary font-bold"
+          >Visit Achham</a
+        >
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="index.html" class="nav-link text-sm font-medium">Home</a>
+          <a href="destinations.html" class="nav-link text-sm font-medium"
+            >Destinations</a
+          >
+          <a href="#" class="nav-link text-sm font-medium">Culture</a>
+          <a href="#" class="nav-link text-sm font-medium active"
+            >Plan Your Trip</a
+          >
+          <a href="#" class="nav-link text-sm font-medium">Stay</a>
+          <a href="#" class="nav-link text-sm font-medium">Gallery</a>
+          <a href="#" class="nav-link text-sm font-medium">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden w-10 h-10 flex items-center justify-center text-primary"
+          id="mobile-menu-button"
+        >
+          <i class="ri-menu-line ri-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div
+        class="md:hidden hidden bg-white w-full absolute top-full left-0 shadow-md"
+        id="mobile-menu"
+      >
+        <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+          <a href="index.html" class="nav-link text-sm font-medium py-2"
+            >Home</a
+          >
+          <a href="destinations.html" class="nav-link text-sm font-medium py-2"
+            >Destinations</a
+          >
+          <a href="#" class="nav-link text-sm font-medium py-2">Culture</a>
+          <a href="#" class="nav-link text-sm font-medium py-2 active"
+            >Plan Your Trip</a
+          >
+          <a href="#" class="nav-link text-sm font-medium py-2">Stay</a>
+          <a href="#" class="nav-link text-sm font-medium py-2">Gallery</a>
+          <a href="#" class="nav-link text-sm font-medium py-2">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="hero-section relative overflow-hidden mt-16"
+      style="
+        background-image: url('https://readdy.ai/api/search-image?query=Breathtaking%20panoramic%20view%20of%20Ramaroshan%20lakes%20in%20Achham%2C%20Nepal%2C%20with%20crystal%20clear%20turquoise%20water%20surrounded%20by%20lush%20green%20hills%20and%20forests%2C%20dramatic%20clouds%20hovering%20over%20mountain%20peaks%2C%20natural%20pristine%20landscape%20with%20no%20human%20elements%2C%20soft%20morning%20light%20creating%20a%20serene%20atmosphere&width=1280&height=720&seq=1&orientation=landscape');
+      "
+    >
+      <div
+        class="hero-overlay absolute inset-0 flex items-center justify-center"
+      >
+        <div class="text-center px-4">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto leading-tight"
+          >
+            Let's Get You There
+          </h1>
+          <p class="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto">
+            Trip Planning Made Easy - Your complete guide to visiting Achham
+          </p>
+          <div
+            class="flex items-center justify-center space-x-2 text-white text-lg"
+          >
+            <i class="ri-roadster-line"></i>
+            <span>Expert tips • Local insights • Practical advice</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column - Travel Information -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- How to Reach -->
+          <div class="bg-white rounded-md shadow-sm border border-gray-100">
+            <div
+              class="accordion-header p-6 border-b border-gray-100"
+              onclick="toggleAccordion('reach')"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-sky bg-opacity-20 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="ri-bus-line text-primary text-xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-800">
+                    How to Reach Achham
+                  </h3>
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-xl text-gray-400 accordion-arrow"
+                  id="reach-arrow"
+                ></i>
+              </div>
+            </div>
+            <div class="accordion-content" id="reach-content">
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div class="bg-[#F9F8F4] p-5 rounded-md">
+                    <h4
+                      class="font-semibold text-gray-800 mb-3 flex items-center"
+                    >
+                      <i class="ri-flight-takeoff-line text-primary mr-2"></i>
+                      From Kathmandu
+                    </h4>
+                    <ul class="text-gray-600 space-y-2">
+                      <li class="flex items-start">
+                        <span
+                          class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"
+                        ></span>
+                        <span
+                          >Fly to Dhangadhi Airport (1 hour) + 3-hour scenic
+                          drive</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <span
+                          class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"
+                        ></span>
+                        <span
+                          >Tourist bus journey (12-14 hours) - comfortable
+                          overnight option</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <span
+                          class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"
+                        ></span>
+                        <span
+                          >Private vehicle hire (10-12 hours) - flexibility to
+                          stop</span
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="bg-[#F9F8F4] p-5 rounded-md">
+                    <h4
+                      class="font-semibold text-gray-800 mb-3 flex items-center"
+                    >
+                      <i class="ri-bus-line text-primary mr-2"></i>
+                      From Nepalgunj
+                    </h4>
+                    <ul class="text-gray-600 space-y-2">
+                      <li class="flex items-start">
+                        <span
+                          class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"
+                        ></span>
+                        <span
+                          >Direct bus service (6-7 hours) - most
+                          economical</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <span
+                          class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"
+                        ></span>
+                        <span
+                          >Shared jeep (5-6 hours) - faster alternative</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <span
+                          class="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"
+                        ></span>
+                        <span>Local flights available during peak season</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-md">
+                  <h5 class="font-semibold text-blue-800 mb-2">💡 Pro Tip</h5>
+                  <p class="text-blue-700 text-sm">
+                    Book transport in advance during festival seasons
+                    (September-November). Road conditions are best from October
+                    to April.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suggested Itineraries -->
+          <div class="bg-white rounded-md shadow-sm border border-gray-100">
+            <div
+              class="accordion-header p-6 border-b border-gray-100"
+              onclick="toggleAccordion('itinerary')"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="ri-calendar-line text-primary text-xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-800">
+                    Suggested Itineraries
+                  </h3>
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-xl text-gray-400 accordion-arrow"
+                  id="itinerary-arrow"
+                ></i>
+              </div>
+            </div>
+            <div class="accordion-content" id="itinerary-content">
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="border border-gray-200 rounded-md p-5">
+                    <div class="flex items-center mb-4">
+                      <span
+                        class="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium mr-3"
+                        >2 Days</span
+                      >
+                      <h4 class="font-semibold text-gray-800">
+                        Quick Explorer
+                      </h4>
+                    </div>
+                    <div class="space-y-3">
+                      <div class="flex items-start">
+                        <span
+                          class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >1</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Arrival & Mangalsen Fort
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Explore historic ruins, local market visit
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <span
+                          class="bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >2</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Baidyanath Temple & Departure
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Morning prayers, cultural experience
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border border-gray-200 rounded-md p-5">
+                    <div class="flex items-center mb-4">
+                      <span
+                        class="bg-secondary text-white px-3 py-1 rounded-full text-sm font-medium mr-3"
+                        >5 Days</span
+                      >
+                      <h4 class="font-semibold text-gray-800">
+                        Complete Experience
+                      </h4>
+                    </div>
+                    <div class="space-y-3">
+                      <div class="flex items-start">
+                        <span
+                          class="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >1</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Arrival & Settlement
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Homestay check-in, local orientation
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <span
+                          class="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >2</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Ramaroshan Lakes Trek
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Full day hiking, camping option
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <span
+                          class="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >3</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Cultural Immersion
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Village visits, traditional crafts
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <span
+                          class="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >4</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Mangalsen & Temples
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Historical sites, spiritual journey
+                          </p>
+                        </div>
+                      </div>
+                      <div class="flex items-start">
+                        <span
+                          class="bg-secondary text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5"
+                          >5</span
+                        >
+                        <div>
+                          <p class="font-medium text-gray-800">
+                            Leisure & Departure
+                          </p>
+                          <p class="text-sm text-gray-600">
+                            Shopping, final cultural activities
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- What to Pack -->
+          <div class="bg-white rounded-md shadow-sm border border-gray-100">
+            <div
+              class="accordion-header p-6 border-b border-gray-100"
+              onclick="toggleAccordion('pack')"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="ri-suitcase-line text-primary text-xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-800">
+                    What to Pack
+                  </h3>
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-xl text-gray-400 accordion-arrow"
+                  id="pack-arrow"
+                ></i>
+              </div>
+            </div>
+            <div class="accordion-content" id="pack-content">
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div>
+                    <h4
+                      class="font-semibold text-gray-800 mb-3 flex items-center"
+                    >
+                      <i class="ri-shirt-line text-primary mr-2"></i>
+                      Clothing
+                    </h4>
+                    <ul class="text-gray-600 space-y-1 text-sm">
+                      <li>• Layered clothing for temperature changes</li>
+                      <li>• Comfortable hiking boots</li>
+                      <li>• Rain jacket (monsoon season)</li>
+                      <li>• Warm jacket for evenings</li>
+                      <li>• Modest clothing for temples</li>
+                      <li>• Sun hat and sunglasses</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-semibold text-gray-800 mb-3 flex items-center"
+                    >
+                      <i class="ri-health-book-line text-primary mr-2"></i>
+                      Health & Safety
+                    </h4>
+                    <ul class="text-gray-600 space-y-1 text-sm">
+                      <li>• First aid kit basics</li>
+                      <li>• Sunscreen (high SPF)</li>
+                      <li>• Insect repellent</li>
+                      <li>• Water purification tablets</li>
+                      <li>• Personal medications</li>
+                      <li>• Hand sanitizer</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-semibold text-gray-800 mb-3 flex items-center"
+                    >
+                      <i class="ri-camera-line text-primary mr-2"></i>
+                      Electronics & Gear
+                    </h4>
+                    <ul class="text-gray-600 space-y-1 text-sm">
+                      <li>• Camera with extra batteries</li>
+                      <li>• Power bank for phone</li>
+                      <li>• Headlamp/flashlight</li>
+                      <li>• Universal power adapter</li>
+                      <li>• Waterproof bag covers</li>
+                      <li>• Trekking poles (optional)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Local Etiquette -->
+          <div class="bg-white rounded-md shadow-sm border border-gray-100">
+            <div
+              class="accordion-header p-6 border-b border-gray-100"
+              onclick="toggleAccordion('etiquette')"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="ri-hand-heart-line text-primary text-xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-800">
+                    Local Etiquette & Culture
+                  </h3>
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-xl text-gray-400 accordion-arrow"
+                  id="etiquette-arrow"
+                ></i>
+              </div>
+            </div>
+            <div class="accordion-content" id="etiquette-content">
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 class="font-semibold text-gray-800 mb-3 text-green-700">
+                      ✓ Do's
+                    </h4>
+                    <ul class="text-gray-600 space-y-2">
+                      <li class="flex items-start">
+                        <i class="ri-check-line text-green-500 mr-2 mt-1"></i>
+                        <span>Greet with "Namaste" with palms together</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-check-line text-green-500 mr-2 mt-1"></i>
+                        <span>Remove shoes before entering homes/temples</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-check-line text-green-500 mr-2 mt-1"></i>
+                        <span
+                          >Dress modestly, especially at religious sites</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-check-line text-green-500 mr-2 mt-1"></i>
+                        <span>Ask permission before photographing people</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-check-line text-green-500 mr-2 mt-1"></i>
+                        <span>Use right hand for giving/receiving items</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-800 mb-3 text-red-700">
+                      ✗ Don'ts
+                    </h4>
+                    <ul class="text-gray-600 space-y-2">
+                      <li class="flex items-start">
+                        <i class="ri-close-line text-red-500 mr-2 mt-1"></i>
+                        <span
+                          >Don't touch someone's head or point feet at
+                          people</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-close-line text-red-500 mr-2 mt-1"></i>
+                        <span
+                          >Don't eat beef or touch leather items near
+                          temples</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-close-line text-red-500 mr-2 mt-1"></i>
+                        <span>Don't show affection publicly</span>
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-close-line text-red-500 mr-2 mt-1"></i>
+                        <span
+                          >Don't waste food - it's considered
+                          disrespectful</span
+                        >
+                      </li>
+                      <li class="flex items-start">
+                        <i class="ri-close-line text-red-500 mr-2 mt-1"></i>
+                        <span>Don't ignore local customs during festivals</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Contacts -->
+          <div class="bg-white rounded-md shadow-sm border border-gray-100">
+            <div
+              class="accordion-header p-6 border-b border-gray-100"
+              onclick="toggleAccordion('emergency')"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="ri-phone-line text-primary text-xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-800">
+                    Emergency Contacts
+                  </h3>
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-xl text-gray-400 accordion-arrow"
+                  id="emergency-arrow"
+                ></i>
+              </div>
+            </div>
+            <div class="accordion-content" id="emergency-content">
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-4">
+                    <div class="bg-red-50 p-4 rounded-md">
+                      <h4 class="font-semibold text-red-800 mb-2">
+                        🚨 Emergency Services
+                      </h4>
+                      <div class="space-y-2 text-sm">
+                        <p><strong>Police:</strong> 100</p>
+                        <p><strong>Medical Emergency:</strong> 102</p>
+                        <p><strong>Fire Department:</strong> 101</p>
+                        <p><strong>Tourist Police:</strong> +977-9851135321</p>
+                      </div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-md">
+                      <h4 class="font-semibold text-blue-800 mb-2">
+                        🏥 Medical Facilities
+                      </h4>
+                      <div class="space-y-2 text-sm">
+                        <p>
+                          <strong>Mangalsen Hospital:</strong> +977-96-420145
+                        </p>
+                        <p><strong>Health Post:</strong> +977-96-420189</p>
+                        <p>
+                          <strong>Pharmacy:</strong> Available in main market
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="space-y-4">
+                    <div class="bg-green-50 p-4 rounded-md">
+                      <h4 class="font-semibold text-green-800 mb-2">
+                        ℹ️ Tourist Information
+                      </h4>
+                      <div class="space-y-2 text-sm">
+                        <p><strong>Tourism Office:</strong> +977-96-420123</p>
+                        <p>
+                          <strong>Guide Association:</strong> +977-9845678901
+                        </p>
+                        <p>
+                          <strong>Homestay Network:</strong> +977-9823456789
+                        </p>
+                      </div>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-md">
+                      <h4 class="font-semibold text-yellow-800 mb-2">
+                        🚗 Transportation
+                      </h4>
+                      <div class="space-y-2 text-sm">
+                        <p><strong>Bus Station:</strong> +977-96-420156</p>
+                        <p><strong>Taxi Service:</strong> +977-9812345678</p>
+                        <p><strong>Jeep Rental:</strong> +977-9876543210</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weather Information -->
+          <div class="bg-white rounded-md shadow-sm border border-gray-100">
+            <div
+              class="accordion-header p-6 border-b border-gray-100"
+              onclick="toggleAccordion('weather')"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                  <div
+                    class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center"
+                  >
+                    <i class="ri-sun-cloudy-line text-primary text-xl"></i>
+                  </div>
+                  <h3 class="text-xl font-semibold text-gray-800">
+                    Seasonal Weather Info
+                  </h3>
+                </div>
+                <i
+                  class="ri-arrow-down-s-line text-xl text-gray-400 accordion-arrow"
+                  id="weather-arrow"
+                ></i>
+              </div>
+            </div>
+            <div class="accordion-content" id="weather-content">
+              <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-md">
+                      <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-blue-800">
+                          🌨️ Winter (Dec-Feb)
+                        </h4>
+                        <span class="text-sm text-blue-600">5°C - 18°C</span>
+                      </div>
+                      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                        <div
+                          class="bg-blue-600 h-2 rounded-full"
+                          style="width: 40%"
+                        ></div>
+                      </div>
+                      <p class="text-sm text-blue-700">
+                        Cold mornings, clear skies. Perfect for trekking with
+                        proper gear.
+                      </p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-md">
+                      <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-green-800">
+                          🌸 Spring (Mar-May)
+                        </h4>
+                        <span class="text-sm text-green-600">12°C - 25°C</span>
+                      </div>
+                      <div class="w-full bg-green-200 rounded-full h-2 mb-2">
+                        <div
+                          class="bg-green-600 h-2 rounded-full"
+                          style="width: 70%"
+                        ></div>
+                      </div>
+                      <p class="text-sm text-green-700">
+                        Best time to visit! Pleasant weather, blooming
+                        rhododendrons.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="space-y-4">
+                    <div class="bg-yellow-50 p-4 rounded-md">
+                      <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-yellow-800">
+                          ☔ Monsoon (Jun-Sep)
+                        </h4>
+                        <span class="text-sm text-yellow-600">18°C - 28°C</span>
+                      </div>
+                      <div class="w-full bg-yellow-200 rounded-full h-2 mb-2">
+                        <div
+                          class="bg-yellow-600 h-2 rounded-full"
+                          style="width: 90%"
+                        ></div>
+                      </div>
+                      <p class="text-sm text-yellow-700">
+                        Heavy rainfall, lush greenery. Roads may be challenging.
+                      </p>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-md">
+                      <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-orange-800">
+                          🍂 Autumn (Oct-Nov)
+                        </h4>
+                        <span class="text-sm text-orange-600">8°C - 22°C</span>
+                      </div>
+                      <div class="w-full bg-orange-200 rounded-full h-2 mb-2">
+                        <div
+                          class="bg-orange-600 h-2 rounded-full"
+                          style="width: 85%"
+                        ></div>
+                      </div>
+                      <p class="text-sm text-orange-700">
+                        Excellent visibility, festival season, ideal for
+                        photography.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="bg-gradient-to-r from-sky to-sage p-4 rounded-md text-white"
+                >
+                  <h5 class="font-semibold mb-2">🌟 Best Time to Visit</h5>
+                  <p class="text-sm">
+                    October to April offers the most favorable conditions with
+                    clear skies, comfortable temperatures, and accessible roads.
+                    Spring (March-May) is particularly beautiful with blooming
+                    flowers.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Trip Planner Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="sticky-sidebar space-y-6">
+            <!-- Personal Trip Checklist -->
+            <div class="bg-white rounded-md shadow-sm border border-gray-100">
+              <div class="p-6 border-b border-gray-100">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">
+                  My Trip Checklist
+                </h3>
+                <p class="text-sm text-gray-600">
+                  Track your planning progress
+                </p>
+              </div>
+              <div class="p-6 space-y-3">
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Book transportation to Achham</span>
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm"
+                    >Arrange accommodation (homestay/hotel)</span
+                  >
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Pack appropriate clothing & gear</span>
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Get travel insurance</span>
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Download offline maps</span>
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Learn basic Nepali phrases</span>
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Inform bank about travel plans</span>
+                </div>
+                <div
+                  class="checklist-item p-3 rounded-md border border-gray-100 flex items-center space-x-3 cursor-pointer"
+                  onclick="toggleChecklistItem(this)"
+                >
+                  <input type="checkbox" class="w-4 h-4 text-primary rounded" />
+                  <span class="text-sm">Backup important documents</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Contact -->
+            <div
+              class="bg-gradient-to-br from-primary to-secondary text-white rounded-md p-6"
+            >
+              <h3 class="text-lg font-semibold mb-2">Need Help Planning?</h3>
+              <p class="text-sm mb-4 text-white text-opacity-90">
+                Our local experts are here to help you create the perfect Achham
+                experience.
+              </p>
+              <button
+                class="w-full bg-white text-primary hover:bg-gray-100 px-4 py-2 rounded-button font-medium text-sm transition duration-300"
+              >
+                Contact Local Guide
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="py-16 md:py-20 bg-[#F9F8F4]">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-6">
+            Ready to Explore Achham?
+          </h2>
+          <p class="text-lg mb-8 max-w-2xl mx-auto text-gray-600">
+            Your adventure awaits in one of Nepal's most beautiful hidden
+            destinations. Let's help you find the perfect place to stay.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap"
+            >
+              Explore Accommodations
+            </button>
+            <button
+              class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap"
+            >
+              Book a Local Guide
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- About -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Visit Achham</h3>
+            <p class="text-gray-400 mb-6">
+              Promoting sustainable tourism and preserving the cultural heritage
+              of Achham, Nepal since 2020.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition duration-300"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition duration-300"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition duration-300"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Destinations</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Culture</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Stay</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Gallery</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="ri-map-pin-line mt-1 mr-3"></i>
+                <span class="text-gray-400"
+                  >Tourism Board Office, Mangalsen, Achham, Nepal</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="ri-phone-line mr-3"></i>
+                <span class="text-gray-400">+977 9812345678</span>
+              </li>
+              <li class="flex items-center">
+                <i class="ri-mail-line mr-3"></i>
+                <span class="text-gray-400">info@visitachham.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Newsletter</h3>
+            <p class="text-gray-400 mb-4">
+              Get travel tips and updates about Achham.
+            </p>
+            <form class="mb-3">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  class="bg-gray-800 text-white px-4 py-2 rounded-l-button w-full border-none focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary hover:bg-opacity-90 text-white px-4 py-2 rounded-r-button whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+            <p class="text-xs text-gray-500">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-800 pt-8 mt-8 text-center text-gray-500 text-sm"
+        >
+          <p>&copy; 2025 Visit Achham. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- <script>
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", function () {
+          const mobileMenuButton = document.getElementById("mobile-menu-button");
+          const mobileMenu = document.getElementById("mobile-menu");
+
+          mobileMenuButton.addEventListener("click", function () {
+              mobileMenu.classList.toggle("hidden");
+              if (mobileMenu.classList.contains("hidden")) {
+                  mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-xl"></i>';
+              } else {
+                  mobileMenuButton.innerHTML = '<i class="ri-close-line ri-xl"></i>';
+              }
+          });
+      });
+
+      // Accordion functionality
+      function toggleAccordion(id) {
+          const content = document.getElementById(id + '-content');
+          const arrow = document.getElementById(id + '-arrow');
+
+          if (!content || !arrow) return;
+
+          // Toggle the clicked accordion
+          if (content.classList.contains('active')) {
+              content.classList.remove('active');
+              arrow.classList.remove('rotated');
+          } else {
+              content.classList.add('active');
+              arrow.classList.add('rotated');
+          }
+      }
+
+      // Checklist functionality
+      function toggleChecklistItem(item) {
+          const checkbox = item.querySelector('input[type="checkbox"]');
+          const span = item.querySelector('span');
+
+          checkbox.checked = !checkbox.checked;
+
+          if (checkbox.checked) {
+              span.style.textDecoration = 'line-through';
+              span.style.color = '#9CA3AF';
+              item.style.backgroundColor = '#F3F4F6';
+          } else {
+              span.style.textDecoration = 'none';
+              span.style.color = '';
+              item.style.backgroundColor = '';
+          }
+      }
+
+      // Budget Calculator
+      function calculateBudget() {
+          const days = parseInt(document.getElementById('trip-days').value) || 1;
+          const style = document.getElementById('travel-style').value;
+
+          let rates = {
+              budget: { accommodation: 8, food: 6, activity: 3, transport: 2 },
+              standard: { accommodation: 15, food: 10, activity: 5, transport: 4 },
+              luxury: { accommodation: 35, food: 20, activity: 12, transport: 8 }
+          };
+
+          const selectedRates = rates[style];
+
+          const accommodationCost = selectedRates.accommodation * days;
+          const foodCost = selectedRates.food * days;
+          const activityCost = selectedRates.activity * days;
+          const transportCost = selectedRates.transport * days;
+          const totalCost = accommodationCost + foodCost + activityCost + transportCost;
+
+          document.getElementById('accommodation-cost').textContent = ' + accommodationCost;
+          document.getElementById('food-cost').textContent = ' + foodCost;
+          document.getElementById('activity-cost').textContent = ' + activityCost;
+          document.getElementById('transport-cost').textContent = ' + transportCost;
+          document.getElementById('total-cost').textContent = ' + totalCost;
+      }
+
+      // Save Trip functionality
+      function saveTrip() {
+          const checkedItems = document.querySelectorAll('.checklist-item input:checked').length;
+          const totalItems = document.querySelectorAll('.checklist-item input').length;
+          const progress = Math.round((checkedItems / totalItems) * 100);
+
+          alert(`Trip plan saved! You've completed ${progress}% of your planning checklist. Keep going!`);
+      }
+    </script> -->
+    <script>
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-xl"></i>';
+          } else {
+            mobileMenuButton.innerHTML = '<i class="ri-close-line ri-xl"></i>';
+          }
+        });
+      });
+
+      // ✅ Fixed Accordion functionality
+      function toggleAccordion(id) {
+        const content = document.getElementById(id + "-content");
+        const header = document.querySelector(
+          `[onclick="toggleAccordion('${id}')"]`
+        );
+        const arrow = header.querySelector(".accordion-arrow");
+
+        if (!content || !arrow) return;
+
+        if (content.classList.contains("active")) {
+          content.classList.remove("active");
+          arrow.classList.remove("rotated");
+        } else {
+          content.classList.add("active");
+          arrow.classList.add("rotated");
+        }
+      }
+
+      // Checklist functionality
+      function toggleChecklistItem(item) {
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        const span = item.querySelector("span");
+
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+          span.style.textDecoration = "line-through";
+          span.style.color = "#9CA3AF";
+          item.style.backgroundColor = "#F3F4F6";
+        } else {
+          span.style.textDecoration = "none";
+          span.style.color = "";
+          item.style.backgroundColor = "";
+        }
+      }
+
+      // Budget Calculator
+      function calculateBudget() {
+        const days = parseInt(document.getElementById("trip-days").value) || 1;
+        const style = document.getElementById("travel-style").value;
+
+        let rates = {
+          budget: { accommodation: 8, food: 6, activity: 3, transport: 2 },
+          standard: { accommodation: 15, food: 10, activity: 5, transport: 4 },
+          luxury: { accommodation: 35, food: 20, activity: 12, transport: 8 },
+        };
+
+        const selectedRates = rates[style];
+
+        const accommodationCost = selectedRates.accommodation * days;
+        const foodCost = selectedRates.food * days;
+        const activityCost = selectedRates.activity * days;
+        const transportCost = selectedRates.transport * days;
+        const totalCost =
+          accommodationCost + foodCost + activityCost + transportCost;
+
+        document.getElementById("accommodation-cost").textContent =
+          "₨ " + accommodationCost;
+        document.getElementById("food-cost").textContent = "₨ " + foodCost;
+        document.getElementById("activity-cost").textContent =
+          "₨ " + activityCost;
+        document.getElementById("transport-cost").textContent =
+          "₨ " + transportCost;
+        document.getElementById("total-cost").textContent = "₨ " + totalCost;
+      }
+
+      // Save Trip functionality
+      function saveTrip() {
+        const checkedItems = document.querySelectorAll(
+          ".checklist-item input:checked"
+        ).length;
+        const totalItems = document.querySelectorAll(
+          ".checklist-item input"
+        ).length;
+        const progress = Math.round((checkedItems / totalItems) * 100);
+
+        alert(
+          `Trip plan saved! You've completed ${progress}% of your planning checklist. Keep going!`
+        );
+      }
+    </script>
+  </body>
+</html>
