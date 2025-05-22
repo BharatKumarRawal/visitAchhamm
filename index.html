@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visit Achham - Discover Untouched Nepal</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#2C5530", secondary: "#8B6D4C" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+      body {
+        font-family: "Lato", sans-serif;
+        color: #333333;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .nav-link,
+      .btn {
+        font-family: "Poppins", sans-serif;
+      }
+      .logo {
+        font-family: "Pacifico", serif;
+      }
+      .hero-carousel {
+        height: 80vh;
+      }
+      .hero-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        background-size: cover;
+        background-position: center;
+      }
+      .hero-slide.active {
+        opacity: 1;
+      }
+      .hero-overlay {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.1),
+          rgba(0, 0, 0, 0.6)
+        );
+      }
+      .carousel-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .carousel-indicator.active {
+        background-color: #fff;
+      }
+      .attraction-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .blog-card:hover .blog-title {
+        color: #2c5530;
+      }
+      .testimonial-slide {
+        display: none;
+      }
+      .testimonial-slide.active {
+        display: block;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      input[type="email"] {
+        outline: none;
+      }
+      input[type="email"]:focus {
+        border-color: #2c5530;
+      }
+      .social-icon:hover {
+        background-color: #2c5530;
+        color: white;
+      }
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #2c5530;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+      @media (max-width: 768px) {
+        .hero-carousel {
+          height: 60vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="logo text-2xl text-primary font-bold"
+          >Visit Achham</a
+        >
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="index.html" class="nav-link text-sm font-medium active"
+            >Home</a
+          >
+          <a href="destinations.html" class="nav-link text-sm font-medium"
+            >Destinations</a
+          >
+          <a href="#" class="nav-link text-sm font-medium">Culture</a>
+          <a href="#" class="nav-link text-sm font-medium">Plan Your Trip</a>
+          <a href="#" class="nav-link text-sm font-medium">Stay</a>
+          <a href="#" class="nav-link text-sm font-medium">Gallery</a>
+          <a href="#" class="nav-link text-sm font-medium">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden w-10 h-10 flex items-center justify-center text-primary"
+          id="mobile-menu-button"
+        >
+          <i class="ri-menu-line ri-xl"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div
+        class="md:hidden hidden bg-white w-full absolute top-full left-0 shadow-md"
+        id="mobile-menu"
+      >
+        <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+          <a href="index.html" class="nav-link text-sm font-medium active py-2"
+            >Home</a
+          >
+          <a href="destinations.html" class="nav-link text-sm font-medium py-2"
+            >Destinations</a
+          >
+          <a href="#" class="nav-link text-sm font-medium py-2">Culture</a>
+          <a href="#" class="nav-link text-sm font-medium py-2"
+            >Plan Your Trip</a
+          >
+          <a href="#" class="nav-link text-sm font-medium py-2">Stay</a>
+          <a href="#" class="nav-link text-sm font-medium py-2">Gallery</a>
+          <a href="#" class="nav-link text-sm font-medium py-2">Contact</a>
+        </div>
+      </div>
+    </header>
+    <!-- Hero Carousel -->
+    <section class="hero-carousel relative overflow-hidden mt-16">
+      <div
+        class="hero-slide active"
+        style="
+          background-image: url('https://readdy.ai/api/search-image?query=Breathtaking%20panoramic%20view%20of%20Ramaroshan%20lakes%20in%20Achham%2C%20Nepal%2C%20with%20crystal%20clear%20turquoise%20water%20surrounded%20by%20lush%20green%20hills%20and%20forests%2C%20dramatic%20clouds%20hovering%20over%20mountain%20peaks%2C%20natural%20pristine%20landscape%20with%20no%20human%20elements%2C%20soft%20morning%20light%20creating%20a%20serene%20atmosphere&width=1280&height=720&seq=1&orientation=landscape');
+        "
+      >
+        <div
+          class="hero-overlay absolute inset-0 flex items-center justify-center"
+        >
+          <div class="text-center px-4">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl mx-auto leading-tight"
+            >
+              Discover Untouched Nepal – Visit Achham
+            </h1>
+            <p class="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto">
+              Experience the pristine beauty and rich cultural heritage of
+              Nepal's hidden gem
+            </p>
+            <button
+              class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-semibold text-lg transition duration-300 whitespace-nowrap"
+            >
+              Explore Now
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hero-slide"
+        style="
+          background-image: url('https://readdy.ai/api/search-image?query=Ancient%20Baidyanath%20Temple%20in%20Achham%2C%20Nepal%2C%20with%20traditional%20Nepali%20architecture%2C%20stone%20carvings%20and%20wooden%20details%2C%20surrounded%20by%20prayer%20flags%20and%20rhododendron%20flowers%2C%20misty%20mountains%20in%20background%2C%20warm%20golden%20sunset%20light%20illuminating%20the%20temple%20structure%2C%20spiritual%20and%20serene%20atmosphere&width=1280&height=720&seq=2&orientation=landscape');
+        "
+      >
+        <div
+          class="hero-overlay absolute inset-0 flex items-center justify-center"
+        >
+          <div class="text-center px-4">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl mx-auto leading-tight"
+            >
+              Discover Untouched Nepal – Visit Achham
+            </h1>
+            <p class="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto">
+              Experience the pristine beauty and rich cultural heritage of
+              Nepal's hidden gem
+            </p>
+            <button
+              class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-semibold text-lg transition duration-300 whitespace-nowrap"
+            >
+              Explore Now
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hero-slide"
+        style="
+          background-image: url('https://readdy.ai/api/search-image?query=Colorful%20traditional%20Deuda%20Dance%20performance%20in%20Achham%2C%20Nepal%2C%20with%20locals%20in%20vibrant%20traditional%20costumes%20forming%20a%20circle%2C%20mountains%20in%20background%2C%20festival%20atmosphere%20with%20decorative%20lights%2C%20musicians%20playing%20traditional%20instruments%2C%20joyful%20expressions%20on%20dancers%20faces%2C%20authentic%20cultural%20celebration&width=1280&height=720&seq=3&orientation=landscape');
+        "
+      >
+        <div
+          class="hero-overlay absolute inset-0 flex items-center justify-center"
+        >
+          <div class="text-center px-4">
+            <h1
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl mx-auto leading-tight"
+            >
+              Discover Untouched Nepal – Visit Achham
+            </h1>
+            <p class="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto">
+              Experience the pristine beauty and rich cultural heritage of
+              Nepal's hidden gem
+            </p>
+            <button
+              class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-semibold text-lg transition duration-300 whitespace-nowrap"
+            >
+              Explore Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel Indicators -->
+      <div
+        class="absolute bottom-8 left-0 right-0 flex justify-center space-x-3"
+      >
+        <span class="carousel-indicator active" data-index="0"></span>
+        <span class="carousel-indicator" data-index="1"></span>
+        <span class="carousel-indicator" data-index="2"></span>
+      </div>
+    </section>
+
+    <!-- Welcome Section -->
+    <section class="py-16 md:py-20 bg-[#F9F8F4]">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-6 text-gray-800">
+            Welcome to Achham
+          </h2>
+          <div class="w-20 h-1 bg-primary mx-auto mb-8"></div>
+          <p class="text-lg mb-6 leading-relaxed">
+            Nestled in the far-western region of Nepal, Achham is a land of
+            breathtaking natural beauty, ancient temples, and rich cultural
+            heritage. With its pristine lakes, verdant hills, and traditional
+            villages, it offers an authentic glimpse into Nepal's unspoiled
+            countryside.
+          </p>
+          <p class="text-lg mb-6 leading-relaxed">
+            From the mesmerizing Ramaroshan lakes to the historic Mangalsen Fort
+            and sacred Baidyanath Temple, Achham invites you to explore its
+            hidden treasures and immerse yourself in its unique traditions and
+            warm hospitality.
+          </p>
+          <p class="text-lg leading-relaxed">
+            Join us on a journey to discover one of Nepal's best-kept secrets,
+            where nature, culture, and spirituality blend harmoniously to create
+            unforgettable experiences.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Attractions -->
+    <section class="py-16 md:py-20">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-3 text-center">
+          Featured Attractions
+        </h2>
+        <p class="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+          Discover the natural wonders and cultural treasures that make Achham a
+          must-visit destination
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Attraction 1 -->
+          <div
+            class="attraction-card bg-white rounded-md overflow-hidden shadow-sm transition duration-300"
+          >
+            <div class="h-60 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Stunning%20view%20of%20Ramaroshan%20lakes%20in%20Achham%2C%20Nepal%2C%20with%20crystal%20clear%20blue%20water%20reflecting%20surrounding%20green%20hills%2C%20pristine%20untouched%20nature%2C%20small%20wooden%20boats%20on%20shore%2C%20dramatic%20clouds%20in%20blue%20sky%2C%20perfect%20serene%20landscape%20with%20no%20people%2C%20natural%20beauty&width=600&height=400&seq=4&orientation=landscape"
+                alt="Ramaroshan Lakes"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3">Ramaroshan Lakes</h3>
+              <p class="text-gray-600 mb-4">
+                A breathtaking complex of 12 pristine lakes surrounded by lush
+                forests and rolling hills. This natural paradise offers
+                spectacular hiking trails, diverse wildlife, and stunning
+                panoramic views that will leave you in awe.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center transition hover:text-opacity-80 whitespace-nowrap !rounded-button"
+              >
+                Read More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Attraction 2 -->
+          <div
+            class="attraction-card bg-white rounded-md overflow-hidden shadow-sm transition duration-300"
+          >
+            <div class="h-60 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Historic%20Mangalsen%20Fort%20in%20Achham%2C%20Nepal%2C%20ancient%20stone%20architecture%20with%20traditional%20Nepali%20design%20elements%2C%20mountain%20backdrop%2C%20historic%20ruins%20partially%20covered%20with%20vegetation%2C%20dramatic%20lighting%20highlighting%20architectural%20details%2C%20no%20people%2C%20historic%20atmosphere&width=600&height=400&seq=5&orientation=landscape"
+                alt="Mangalsen Fort"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3">Mangalsen Fort</h3>
+              <p class="text-gray-600 mb-4">
+                Explore the historic ruins of this ancient fort that once served
+                as the capital of the Khasa Kingdom. Perched on a hilltop, it
+                offers fascinating insights into the region's rich history and
+                commanding views of the surrounding valleys.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center transition hover:text-opacity-80 whitespace-nowrap !rounded-button"
+              >
+                Read More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Attraction 3 -->
+          <div
+            class="attraction-card bg-white rounded-md overflow-hidden shadow-sm transition duration-300"
+          >
+            <div class="h-60 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Sacred%20Baidyanath%20Dham%20temple%20in%20Achham%2C%20Nepal%2C%20ancient%20stone%20structure%20with%20intricate%20carvings%2C%20traditional%20Nepali%20religious%20architecture%2C%20prayer%20flags%20fluttering%20in%20wind%2C%20incense%20smoke%20creating%20mystical%20atmosphere%2C%20devotees%20in%20traditional%20dress%20performing%20rituals%2C%20spiritual%20ambiance&width=600&height=400&seq=6&orientation=landscape"
+                alt="Baidyanath Dham"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3">Baidyanath Dham</h3>
+              <p class="text-gray-600 mb-4">
+                Visit this sacred temple dedicated to Lord Shiva, one of the
+                most important pilgrimage sites in the region. The ancient
+                architecture, spiritual atmosphere, and traditional rituals
+                offer a glimpse into Nepal's rich religious heritage.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center transition hover:text-opacity-80 whitespace-nowrap !rounded-button"
+              >
+                Read More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Preview Section -->
+    <section class="py-16 md:py-20 bg-[#F9F8F4]">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-3 text-center">
+          Latest Stories
+        </h2>
+        <p class="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+          Explore our latest articles about Achham's culture, attractions, and
+          travel tips
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Blog Post 1 -->
+          <div class="blog-card bg-white rounded-md overflow-hidden shadow-sm">
+            <div class="h-56 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Traditional%20Nepali%20festival%20celebration%20in%20Achham%20with%20locals%20in%20colorful%20traditional%20attire%2C%20village%20setting%20with%20traditional%20houses%2C%20prayer%20flags%2C%20ritual%20offerings%2C%20mountain%20backdrop%2C%20warm%20evening%20light%2C%20authentic%20cultural%20celebration%2C%20festive%20atmosphere&width=600&height=450&seq=7&orientation=landscape"
+                alt="Festivals of Achham"
+                class="w-full h-full object-cover object-top transition duration-300 hover:scale-105"
+              />
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">May 18, 2025</div>
+              <h3
+                class="blog-title text-xl font-semibold mb-3 transition duration-300"
+              >
+                Festivals of Achham: A Cultural Journey
+              </h3>
+              <p class="text-gray-600 mb-4 line-clamp-2">
+                Discover the vibrant festivals that bring Achham's communities
+                together throughout the year, from the rhythmic Deuda dances to
+                the colorful Gaura celebrations...
+              </p>
+              <button
+                class="text-primary font-medium flex items-center transition hover:text-opacity-80 whitespace-nowrap !rounded-button"
+              >
+                Read More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Blog Post 2 -->
+          <div class="blog-card bg-white rounded-md overflow-hidden shadow-sm">
+            <div class="h-56 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Trekking%20trail%20in%20Achham%2C%20Nepal%20with%20lush%20green%20forests%2C%20mountain%20views%2C%20small%20wooden%20bridge%20crossing%20stream%2C%20hiking%20path%20winding%20through%20hills%2C%20backpacker%20with%20camera%20enjoying%20view%2C%20morning%20mist%2C%20adventure%20travel%20scene%2C%20natural%20beauty&width=600&height=450&seq=8&orientation=landscape"
+                alt="Trekking in Achham"
+                class="w-full h-full object-cover object-top transition duration-300 hover:scale-105"
+              />
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">May 10, 2025</div>
+              <h3
+                class="blog-title text-xl font-semibold mb-3 transition duration-300"
+              >
+                5 Must-Try Trekking Routes in Achham
+              </h3>
+              <p class="text-gray-600 mb-4 line-clamp-2">
+                From the scenic trails around Ramaroshan to the historic paths
+                leading to ancient villages, these trekking routes offer
+                unforgettable experiences for nature lovers...
+              </p>
+              <button
+                class="text-primary font-medium flex items-center transition hover:text-opacity-80 whitespace-nowrap !rounded-button"
+              >
+                Read More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Blog Post 3 -->
+          <div class="blog-card bg-white rounded-md overflow-hidden shadow-sm">
+            <div class="h-56 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=Traditional%20Nepali%20food%20spread%20on%20wooden%20table%2C%20authentic%20local%20cuisine%20from%20Achham%20region%2C%20colorful%20dishes%20with%20rice%2C%20lentils%2C%20vegetables%2C%20pickles%2C%20served%20on%20banana%20leaves%2C%20rustic%20setting%20with%20traditional%20utensils%2C%20steam%20rising%20from%20hot%20food%2C%20appetizing%20presentation&width=600&height=450&seq=9&orientation=landscape"
+                alt="Local Cuisine"
+                class="w-full h-full object-cover object-top transition duration-300 hover:scale-105"
+              />
+            </div>
+            <div class="p-6">
+              <div class="text-sm text-gray-500 mb-2">May 5, 2025</div>
+              <h3
+                class="blog-title text-xl font-semibold mb-3 transition duration-300"
+              >
+                A Taste of Achham: Local Culinary Delights
+              </h3>
+              <p class="text-gray-600 mb-4 line-clamp-2">
+                Explore the unique flavors of Achham's traditional cuisine, from
+                hearty dhido and gundruk to sweet sel roti, and learn how these
+                dishes reflect the region's cultural heritage...
+              </p>
+              <button
+                class="text-primary font-medium flex items-center transition hover:text-opacity-80 whitespace-nowrap !rounded-button"
+              >
+                Read More
+                <i class="ri-arrow-right-line ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-semibold mb-3 text-center">
+          What Visitors Say
+        </h2>
+        <p class="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+          Hear from travelers who have experienced the magic of Achham
+        </p>
+
+        <div class="relative max-w-4xl mx-auto">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-slide active">
+            <div class="bg-[#F9F8F4] rounded-lg p-8 md:p-10 text-center">
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-sm"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20European%20woman%20in%20her%2030s%20with%20brown%20hair%2C%20natural%20makeup%2C%20friendly%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%2C%20warm%20expression%2C%20outdoor%20lighting&width=200&height=200&seq=10&orientation=squarish"
+                  alt="Sarah Johnson"
+                  class="w-full h-full object-cover object-top"
+                />
+              </div>
+              <i class="ri-double-quotes-l text-primary ri-2x mb-4 block"></i>
+              <p class="text-lg md:text-xl italic mb-6">
+                "Visiting Achham was the highlight of my Nepal trip. The
+                Ramaroshan lakes took my breath away, and the warmth of the
+                local people made me feel at home. It's a hidden gem that offers
+                an authentic glimpse into Nepal's natural beauty and cultural
+                richness."
+              </p>
+              <h4 class="font-semibold text-lg">Sarah Johnson</h4>
+              <p class="text-gray-500">Travel Photographer, United Kingdom</p>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-slide">
+            <div class="bg-[#F9F8F4] rounded-lg p-8 md:p-10 text-center">
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-sm"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20Asian%20man%20in%20his%2040s%20with%20glasses%2C%20business%20casual%20attire%2C%20confident%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%2C%20warm%20expression%2C%20indoor%20studio%20lighting&width=200&height=200&seq=11&orientation=squarish"
+                  alt="David Chen"
+                  class="w-full h-full object-cover object-top"
+                />
+              </div>
+              <i class="ri-double-quotes-l text-primary ri-2x mb-4 block"></i>
+              <p class="text-lg md:text-xl italic mb-6">
+                "As someone who has traveled extensively across Asia, I found
+                Achham to be refreshingly untouched by mass tourism. The trek to
+                Baidyanath Temple was spiritually rewarding, and witnessing a
+                traditional Deuda dance performance was a cultural experience
+                I'll never forget."
+              </p>
+              <h4 class="font-semibold text-lg">David Chen</h4>
+              <p class="text-gray-500">Adventure Traveler, Singapore</p>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-slide">
+            <div class="bg-[#F9F8F4] rounded-lg p-8 md:p-10 text-center">
+              <div
+                class="w-16 h-16 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-sm"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20Indian%20woman%20in%20her%2020s%20with%20long%20black%20hair%2C%20casual%20modern%20outfit%2C%20bright%20smile%2C%20neutral%20background%2C%20high%20quality%20portrait%2C%20warm%20expression%2C%20natural%20lighting&width=200&height=200&seq=12&orientation=squarish"
+                  alt="Priya Sharma"
+                  class="w-full h-full object-cover object-top"
+                />
+              </div>
+              <i class="ri-double-quotes-l text-primary ri-2x mb-4 block"></i>
+              <p class="text-lg md:text-xl italic mb-6">
+                "My eco-tourism experience in Achham was incredible. The
+                community-based homestay allowed me to connect with locals and
+                learn about their sustainable practices. The untouched natural
+                beauty and commitment to preserving their heritage make Achham a
+                model for responsible tourism."
+              </p>
+              <h4 class="font-semibold text-lg">Priya Sharma</h4>
+              <p class="text-gray-500">Environmental Journalist, India</p>
+            </div>
+          </div>
+
+          <!-- Testimonial Controls -->
+          <div class="flex justify-center mt-8 space-x-3">
+            <button
+              class="testimonial-dot w-3 h-3 rounded-full bg-gray-300 active"
+              data-index="0"
+            ></button>
+            <button
+              class="testimonial-dot w-3 h-3 rounded-full bg-gray-300"
+              data-index="1"
+            ></button>
+            <button
+              class="testimonial-dot w-3 h-3 rounded-full bg-gray-300"
+              data-index="2"
+            ></button>
+          </div>
+
+          <!-- Arrow Controls -->
+          <button
+            class="absolute top-1/2 -translate-y-1/2 left-0 md:-left-12 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-primary hover:bg-primary hover:text-white transition"
+            id="testimonial-prev"
+          >
+            <i class="ri-arrow-left-s-line ri-lg"></i>
+          </button>
+          <button
+            class="absolute top-1/2 -translate-y-1/2 right-0 md:-right-12 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-primary hover:bg-primary hover:text-white transition"
+            id="testimonial-next"
+          >
+            <i class="ri-arrow-right-s-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="py-16 md:py-20 relative">
+      <div
+        class="absolute inset-0 z-0"
+        style="
+          background-image: url('https://readdy.ai/api/search-image?query=Panoramic%20view%20of%20Achham%2C%20Nepal%20with%20traditional%20villages%20nestled%20in%20green%20hills%2C%20terraced%20fields%2C%20distant%20mountains%2C%20soft%20golden%20sunset%20light%2C%20mist%20in%20valleys%2C%20peaceful%20rural%20landscape%2C%20natural%20beauty%2C%20no%20people%20visible%2C%20serene%20atmosphere&width=1280&height=500&seq=13&orientation=landscape');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.2;
+        "
+      ></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-semibold mb-6">
+            Ready to Experience Achham?
+          </h2>
+          <p class="text-lg mb-8 max-w-2xl mx-auto">
+            Plan your journey to one of Nepal's most beautiful hidden treasures.
+            Let us help you create unforgettable memories in Achham.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap"
+            >
+              Plan Your Trip
+            </button>
+            <button
+              class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- About -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Visit Achham</h3>
+            <p class="text-gray-400 mb-6">
+              Promoting sustainable tourism and preserving the cultural heritage
+              of Achham, Nepal since 2020.
+            </p>
+            <div class="flex space-x-3">
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 transition duration-300"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 transition duration-300"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 transition duration-300"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 transition duration-300"
+              >
+                <i class="ri-youtube-line"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Destinations</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Culture</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Plan Your Trip</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Stay</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Gallery</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-400"
+                  >Tourism Board Office, Mangalsen, Achham, Nepal</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-400">+977 9812345678</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-400">info@visitachham.com</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-5 h-5 flex items-center justify-center mr-3">
+                  <i class="ri-time-line"></i>
+                </div>
+                <span class="text-gray-400">Open daily: 9:00 AM - 5:00 PM</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Newsletter</h3>
+            <p class="text-gray-400 mb-4">
+              Subscribe to receive updates about Achham tourism and special
+              offers.
+            </p>
+            <form class="mb-3">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  class="bg-gray-800 text-white px-4 py-2 rounded-l-button w-full border-none focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary hover:bg-opacity-90 text-white px-4 py-2 rounded-r-button whitespace-nowrap"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+            <p class="text-xs text-gray-500">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-800 pt-8 mt-8 text-center text-gray-500 text-sm"
+        >
+          <p>&copy; 2025 Visit Achham. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-xl"></i>';
+          } else {
+            mobileMenuButton.innerHTML = '<i class="ri-close-line ri-xl"></i>';
+          }
+        });
+      });
+
+      // Hero Carousel
+      document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".hero-slide");
+        const indicators = document.querySelectorAll(".carousel-indicator");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+          slides.forEach((slide) => slide.classList.remove("active"));
+          indicators.forEach((indicator) =>
+            indicator.classList.remove("active")
+          );
+
+          slides[index].classList.add("active");
+          indicators[index].classList.add("active");
+          currentSlide = index;
+        }
+
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener("click", () => showSlide(index));
+        });
+
+        function nextSlide() {
+          let next = currentSlide + 1;
+          if (next >= slides.length) next = 0;
+          showSlide(next);
+        }
+
+        // Auto rotate slides
+        setInterval(nextSlide, 5000);
+      });
+
+      // Testimonials Slider
+      document.addEventListener("DOMContentLoaded", function () {
+        const testimonials = document.querySelectorAll(".testimonial-slide");
+        const dots = document.querySelectorAll(".testimonial-dot");
+        const prevBtn = document.getElementById("testimonial-prev");
+        const nextBtn = document.getElementById("testimonial-next");
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+          testimonials.forEach((testimonial) =>
+            testimonial.classList.remove("active")
+          );
+          dots.forEach((dot) => dot.classList.remove("active", "bg-primary"));
+          dots.forEach((dot) => dot.classList.add("bg-gray-300"));
+
+          testimonials[index].classList.add("active");
+          dots[index].classList.add("active", "bg-primary");
+          dots[index].classList.remove("bg-gray-300");
+          currentTestimonial = index;
+        }
+
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => showTestimonial(index));
+        });
+
+        prevBtn.addEventListener("click", () => {
+          let prev = currentTestimonial - 1;
+          if (prev < 0) prev = testimonials.length - 1;
+          showTestimonial(prev);
+        });
+
+        nextBtn.addEventListener("click", () => {
+          let next = currentTestimonial + 1;
+          if (next >= testimonials.length) next = 0;
+          showTestimonial(next);
+        });
+
+        // Auto rotate testimonials
+        setInterval(() => {
+          let next = currentTestimonial + 1;
+          if (next >= testimonials.length) next = 0;
+          showTestimonial(next);
+        }, 7000);
+      });
+    </script>
+  </body>
+</html>
